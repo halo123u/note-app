@@ -8,11 +8,18 @@ const notes = require('./notes');
 
 const argv = yargs.argv;
 var command = argv._[0];
-console.log('Command:', command);
-console.log('Yargs:',argv);
+// console.log('Command:', command);
+// console.log('Yargs:',argv);
 
 if(command === 'add'){
-    notes.addNote(argv.title, argv.body);
+   var note = notes.addNote(argv.title, argv.body);
+   if(note){
+       console.log(`The note was saved successfully\n
+       Title: ${note.title}
+       Body: ${note.body}`); 
+   } else {
+       console.log("The title of the note already exists. Please try a different title to save your note");
+   }
 } else if (command === 'list'){
     notes.getAll();
 } else if(command === 'read'){
