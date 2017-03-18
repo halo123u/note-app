@@ -1,5 +1,5 @@
-console.log('starting notes.js');
 const fs = require('fs');
+
 //Retrieves the Notes from the notes-data.json file
 //if not Found return an empty array to store new data
 var fetchNotes = () =>{
@@ -35,7 +35,7 @@ var duplicateNotes = notes.filter((note) => note.title === title);
 
 //Return all of the notes available
 var getAll = ()=>{
-console.log('getting all notes');
+ return fetchNotes();
 };
 
 //Returns the note with the title passed
