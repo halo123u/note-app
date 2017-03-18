@@ -1,6 +1,7 @@
 console.log('starting notes.js');
 const fs = require('fs');
-
+//Retrieves the Notes from the notes-data.json file
+//if not Found return an empty array to store new data
 var fetchNotes = () =>{
     try {
         var notesString = fs.readFileSync('notes-data.json');
@@ -11,10 +12,12 @@ var fetchNotes = () =>{
     }
 };
 
+//Save the notes to notes-data.json
 var saveNotes = (notes) =>{
 fs.writeFileSync('notes-data.json', JSON.stringify(notes));
 };
 
+//Save a single note to the file and check for duplicates titles
 var addNote = (title, body) =>{
 var notes = fetchNotes();
 var note = {
@@ -30,27 +33,31 @@ var duplicateNotes = notes.filter((note) => note.title === title);
     }
 };
 
-
+//Return all of the notes available
 var getAll = ()=>{
 console.log('getting all notes');
 };
 
+//Returns the note with the title passed
+//if not found return undefined 
 var getNote = (title) =>{
 var notes = fetchNotes();
+
 var noteFound = notes.filter((note) => note.title === title);
-// console.log(noteFound);
 return noteFound[0];
 };
 
+//Remove note associated with the title passed
 var remove = (title)=>{
 var notes =fetchNotes();
-//filter notes removing the one with the title argument
-var UpdNotes = notes.filter((note)=>note.title !== title);
-//save updated notes 
+
+var UpdNotes = notes.filter((note)=>note.title !== title); 
 saveNotes(UpdNotes);
 
 return notes.length !== UpdNotes.length;   
 };
+
+//Utility function to print out the contents of the note
 var logNote = (note)=>{
     console.log(`-----\nTitle: ${note.title}\nBody:${note.body}`);
 };
