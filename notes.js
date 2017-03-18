@@ -28,14 +28,24 @@ var duplicateNotes = notes.filter((note)=>note.title === title);
         return note;
     }
 };
+
+
 var getAll = ()=>{
 console.log('getting all notes');
 };
+
 var getNote = (title) =>{
 console.log(`getting ${title}`);
 };
+
 var remove = (title)=>{
-    console.log(`Removing ${title}`)
+var notes =fetchNotes();
+//filter notes removing the one with the title argument
+var UpdNotes = notes.filter((note)=>note.title !== title);
+//save updated notes 
+saveNotes(UpdNotes);
+
+return notes.length !== UpdNotes.length;   
 };
 
 module.exports = {
